@@ -4,6 +4,7 @@ import controller.controladores.AutoController;
 import controller.controladores.VendedorController;
 import controller.controladores.VentaController;
 import controller.tda_listas.exceptions.VacioExceptions;
+import model.Auto;
 import model.Vendedor;
 import view.tablas.ModeloTablaAuto;
 import view.tablas.ModeloTablaVendedor;
@@ -20,7 +21,6 @@ import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 
 public class Frm_Ventas extends JFrame {
     private JPanel mainPanel;
@@ -45,7 +45,6 @@ public class Frm_Ventas extends JFrame {
     private JFormattedTextField txtFecha;
     private JTextField txtPrecioTotal;
 
-
     //Constructor
     public Frm_Ventas() {
         initFrame();
@@ -67,6 +66,19 @@ public class Frm_Ventas extends JFrame {
                 }
             }
         });
+
+        cbxAutos.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED){
+                    try {
+                        cargarVistaAuto();
+                    } catch (VacioExceptions ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            }
+        });
     }
 
     // Atributos
@@ -79,6 +91,41 @@ public class Frm_Ventas extends JFrame {
     ModeloTablaAuto mta = new ModeloTablaAuto();
 
     // Metodos
+    public void cargarVistaAuto() throws VacioExceptions {
+        int selectedIndex = cbxAutos.getSelectedIndex();
+
+        if (selectedIndex == 0) {
+            txtModelo.setText("");
+            txtColor.setText("");
+            txtAnio.setText("");
+            cbxMarca.setSelectedIndex(0);
+
+            // Habilitar los campos para la edición
+            txtModelo.setEditable(true);
+            txtColor.setEditable(true);
+            txtAnio.setEditable(true);
+            cbxMarca.setEnabled(true);
+
+        } else {
+            Auto selectedAuto = null;
+            try {
+                selectedAuto = mta.getAutos().get(selectedIndex - 1);
+            } catch (VacioExceptions ex) {
+                throw new RuntimeException(ex);
+            }
+            txtModelo.setText(selectedAuto.getModelo());
+            txtColor.setText(selectedAuto.getColor());
+            txtAnio.setText(selectedAuto.getAnio());
+            cbxMarca.setSelectedIndex(selectedAuto.getId_marca());
+
+            // Deshabilitar los campos para la edición
+            txtModelo.setEditable(false);
+            txtColor.setEditable(false);
+            txtAnio.setEditable(false);
+            cbxMarca.setEnabled(false);
+        }
+    }
+
     public void cargarVistaVendedor() throws VacioExceptions {
         int selectedIndex = cbxVendedores.getSelectedIndex();
 
@@ -262,4 +309,3 @@ public class Frm_Ventas extends JFrame {
 
 
 }
-
