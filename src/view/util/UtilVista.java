@@ -31,7 +31,6 @@ public class UtilVista {
             }
         } catch (VacioExceptions e) {
             e.printStackTrace();
-            System.out.println("Aqui llega auto");
         }
     }
 

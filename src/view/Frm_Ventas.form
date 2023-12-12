@@ -84,6 +84,9 @@
                 </constraints>
                 <properties>
                   <font name="Roboto" size="14" style="0"/>
+                  <model>
+                    <item value="Vendedores"/>
+                  </model>
                 </properties>
               </component>
               <component id="2d22d" class="javax.swing.JTextField" binding="txtNombre">
@@ -142,6 +145,9 @@
                 </constraints>
                 <properties>
                   <font name="Roboto" size="14" style="0"/>
+                  <model>
+                    <item value="Autos"/>
+                  </model>
                 </properties>
               </component>
               <component id="1eab9" class="javax.swing.JComboBox" binding="cbxMarca">
