@@ -2,13 +2,16 @@ package model;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Venta {
     // Atributos
     private Integer id;
     private Double total;
-    private String fecha;
+    private Date fecha;
     private String nro_venta;
+    private String descripcion;
 
     // Relaciones
     private Integer id_auto;

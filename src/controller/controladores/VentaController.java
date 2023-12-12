@@ -46,7 +46,7 @@ public class VentaController extends DataAccessObject<Venta> {
     }
 
     // Metodos
-    public Boolean agregarVenta() {
+    public Boolean guardar() {
         this.venta.setId(generarID());
         return save(venta);
     }

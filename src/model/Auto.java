@@ -15,6 +15,8 @@ public class Auto {
     private Integer id_marca;
 
 
+
+
     // toString
     public String toString() {
         return modelo;

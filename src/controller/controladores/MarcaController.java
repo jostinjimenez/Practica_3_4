@@ -55,6 +55,45 @@ public class MarcaController extends DataAccessObject<Marca> {
         return marcas;
     }
 
+    /*public static void main(String[] args) {
+        MarcaController mc = new MarcaController();
+
+        mc.getMarca().setId(1);
+        mc.getMarca().setNombre("Toyota");
+        mc.getMarca().setEstado(true);
+        mc.save();
+
+        mc.getMarca().setId(2);
+        mc.getMarca().setNombre("Nissan");
+        mc.getMarca().setEstado(true);
+        mc.save();
+
+        mc.getMarca().setId(3);
+        mc.getMarca().setNombre("Mazda");
+        mc.getMarca().setEstado(true);
+        mc.save();
+
+        mc.getMarca().setId(4);
+        mc.getMarca().setNombre("Honda");
+        mc.getMarca().setEstado(true);
+        mc.save();
+
+        mc.getMarca().setId(5);
+        mc.getMarca().setNombre("Hyundai");
+        mc.getMarca().setEstado(true);
+        mc.save();
+
+        mc.getMarca().setId(6);
+        mc.getMarca().setNombre("Kia");
+        mc.getMarca().setEstado(true);
+        mc.save();
+
+        mc.getMarca().setId(7);
+        mc.getMarca().setNombre("Chevrolet");
+        mc.getMarca().setEstado(true);
+        mc.save();
+    }*/
+
     private void quickSort(Marca[] m, int izq, int der, Integer type) {
         Marca pivote = m[izq];
         int i = izq;
