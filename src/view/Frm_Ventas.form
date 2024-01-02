@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="20" left="20" bottom="20" right="20"/>
     <constraints>
-      <xy x="20" y="20" width="1037" height="774"/>
+      <xy x="20" y="20" width="1047" height="774"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -410,13 +410,10 @@
                     <properties>
                       <autoscrolls value="false"/>
                       <model>
-                        <item value="Stock"/>
-                        <item value="Id"/>
-                        <item value="Aro"/>
+                        <item value="ID"/>
+                        <item value="Anio"/>
+                        <item value="Color"/>
                         <item value="Marca"/>
-                        <item value="Precio"/>
-                        <item value="Precio Mayor"/>
-                        <item value="Precio Menor"/>
                       </model>
                       <selectedIndex value="0"/>
                     </properties>
@@ -500,13 +497,10 @@
                     <properties>
                       <autoscrolls value="false"/>
                       <model>
-                        <item value="Stock"/>
-                        <item value="Id"/>
-                        <item value="Aro"/>
-                        <item value="Marca"/>
-                        <item value="Precio"/>
-                        <item value="Precio Mayor"/>
-                        <item value="Precio Menor"/>
+                        <item value="ID"/>
+                        <item value="Nombre"/>
+                        <item value="Apellido"/>
+                        <item value="DNI"/>
                       </model>
                       <selectedIndex value="0"/>
                     </properties>
@@ -597,13 +591,11 @@
                     <properties>
                       <autoscrolls value="false"/>
                       <model>
-                        <item value="Stock"/>
-                        <item value="Id"/>
-                        <item value="Aro"/>
-                        <item value="Marca"/>
-                        <item value="Precio"/>
-                        <item value="Precio Mayor"/>
-                        <item value="Precio Menor"/>
+                        <item value="Nro_Venta"/>
+                        <item value="Fecha"/>
+                        <item value="Total"/>
+                        <item value="Vendedores"/>
+                        <item value="Autos"/>
                       </model>
                       <selectedIndex value="0"/>
                     </properties>

@@ -5,6 +5,7 @@ import controller.tda_listas.exceptions.VacioExceptions;
 import model.Venta;
 
 import javax.swing.table.AbstractTableModel;
+import java.text.SimpleDateFormat;
 
 public class ModeloTablaVenta extends AbstractTableModel {
 
@@ -36,14 +37,31 @@ public class ModeloTablaVenta extends AbstractTableModel {
         } catch (VacioExceptions e) {
             throw new RuntimeException(e);
         }
-        return switch (columnIndex) {
-            case 0 -> (venta != null) ? venta.getNro_venta(): "";
-            case 1 -> (venta != null) ? venta.getTotal() : "";
-            case 2 -> (venta != null) ? venta.getFecha() : "";
-            case 3 -> (venta != null) ? venta.getId_vendedor() : "";
-            case 4 -> (venta != null) ? venta.getId_auto() : "";
-            default -> null;
-        };
+        switch (columnIndex) {
+            case 0 -> {
+                return (venta != null) ? venta.getNro_venta() : "";
+            }
+            case 1 -> {
+                return (venta != null) ?  "$" + venta.getTotal() : "";
+            }
+            case 2 -> {
+                if (venta != null) {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    return dateFormat.format(venta.getFecha());
+                } else {
+                    return "";
+                }
+            }
+            case 3 -> {
+                return (venta != null) ? venta.getId_vendedor() : "";
+            }
+            case 4 -> {
+                return (venta != null) ? venta.getId_auto() : "";
+            }
+            default -> {
+                return null;
+            }
+        }
     }
 
     public String getColumnName(int column) {

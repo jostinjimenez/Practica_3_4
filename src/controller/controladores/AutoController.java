@@ -3,6 +3,7 @@ package controller.controladores;
 import controller.DAO.DataAccessObject;
 import controller.tda_listas.ListaEnlazada;
 import model.Auto;
+import model.Vendedor;
 
 public class AutoController extends DataAccessObject<Auto> {
     // Atributos
@@ -52,6 +53,15 @@ public class AutoController extends DataAccessObject<Auto> {
 
     public Boolean update(Integer index) {
         return update(auto, index);
+    }
+
+    public boolean existe() {
+        for (Auto au : getAutos()) {
+            if (au.getId().equals(auto.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

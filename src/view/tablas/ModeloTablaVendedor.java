@@ -17,7 +17,7 @@ public class ModeloTablaVendedor extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     public ListaEnlazada<Vendedor> getVendedores() {
@@ -37,20 +37,22 @@ public class ModeloTablaVendedor extends AbstractTableModel {
             throw new RuntimeException(e);
         }
         return switch (columnIndex) {
-            case 0 -> (vendedor != null) ? vendedor.getNombre() : "";
-            case 1 -> (vendedor != null) ? vendedor.getApellido() : "";
-            case 2 -> (vendedor != null) ? vendedor.getDni() : "";
-            case 3 -> (vendedor != null) ? vendedor.getRuc(): "";
+            case 0 -> (vendedor != null) ? vendedor.getId(): "";
+            case 1 -> (vendedor != null) ? vendedor.getNombre() : "";
+            case 2 -> (vendedor != null) ? vendedor.getApellido() : "";
+            case 3 -> (vendedor != null) ? vendedor.getDni() : "";
+            case 4 -> (vendedor != null) ? vendedor.getRuc(): "";
             default -> null;
         };
     }
 
     public String getColumnName(int column) {
         return switch (column) {
-            case 0 -> "Nombre";
-            case 1 -> "Apellido";
-            case 2 -> "DNI";
-            case 3 -> "RUC";
+            case 0 -> "Id";
+            case 1 -> "Nombre";
+            case 2 -> "Apellido";
+            case 3 -> "DNI";
+            case 4 -> "RUC";
             default -> null;
         };
     }

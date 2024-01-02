@@ -18,6 +18,8 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,7 +51,6 @@ public class Frm_Ventas extends JFrame {
     public Frm_Ventas() {
         initFrame();
         limpiar();
-        cargarPH();
 
         btnguardar.addActionListener(e -> guardar());
         btncancelar.addActionListener(e -> System.exit(0));
@@ -70,7 +71,7 @@ public class Frm_Ventas extends JFrame {
         cbxAutos.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED){
+                if (e.getStateChange() == ItemEvent.SELECTED) {
                     try {
                         cargarVistaAuto();
                     } catch (VacioExceptions ex) {
@@ -82,87 +83,98 @@ public class Frm_Ventas extends JFrame {
     }
 
     // Atributos
-    private AutoController ac = new AutoController();
-    private VendedorController vc = new VendedorController();
-    private VentaController venc = new VentaController();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    ModeloTablaVenta mtv = new ModeloTablaVenta();
-    ModeloTablaVendedor mtv2 = new ModeloTablaVendedor();
-    ModeloTablaAuto mta = new ModeloTablaAuto();
+    private final AutoController ac = new AutoController();
+    private final VendedorController vc = new VendedorController();
+    private final VentaController venc = new VentaController();
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private final ModeloTablaVenta mtv = new ModeloTablaVenta();
+    private final ModeloTablaVendedor mtv2 = new ModeloTablaVendedor();
+    private final ModeloTablaAuto mta = new ModeloTablaAuto();
 
     // Metodos
-    public void cargarVistaAuto() throws VacioExceptions {
-        int selectedIndex = cbxAutos.getSelectedIndex();
+public void cargarVistaVendedor() throws VacioExceptions {
+    int selectedIndex = cbxVendedores.getSelectedIndex();
 
-        if (selectedIndex == 0) {
-            txtModelo.setText("");
-            txtColor.setText("");
-            txtAnio.setText("");
-            cbxMarca.setSelectedIndex(0);
+    if (selectedIndex == 0) {
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtTelefono.setText("");
+        txtRuc.setText("");
+        txtDni.setText("");
 
-            // Habilitar los campos para la edición
-            txtModelo.setEditable(true);
-            txtColor.setEditable(true);
-            txtAnio.setEditable(true);
-            cbxMarca.setEnabled(true);
+        // Habilitar los campos para la edición
+        txtNombre.setEditable(true);
+        txtApellido.setEditable(true);
+        txtTelefono.setEditable(true);
+        txtRuc.setEditable(true);
+        txtDni.setEditable(true);
 
-        } else {
-            Auto selectedAuto = null;
-            try {
-                selectedAuto = mta.getAutos().get(selectedIndex - 1);
-            } catch (VacioExceptions ex) {
-                throw new RuntimeException(ex);
-            }
-            txtModelo.setText(selectedAuto.getModelo());
-            txtColor.setText(selectedAuto.getColor());
-            txtAnio.setText(selectedAuto.getAnio());
-            cbxMarca.setSelectedIndex(selectedAuto.getId_marca());
-
-            // Deshabilitar los campos para la edición
-            txtModelo.setEditable(false);
-            txtColor.setEditable(false);
-            txtAnio.setEditable(false);
-            cbxMarca.setEnabled(false);
+        // Reset the vendedor in the controller
+        vc.setVendedor(new Vendedor());
+    } else {
+        Vendedor selectedVendedor = null;
+        try {
+            selectedVendedor = mtv2.getVendedores().get(selectedIndex - 1);
+        } catch (VacioExceptions ex) {
+            throw new RuntimeException(ex);
         }
+        txtNombre.setText(selectedVendedor.getNombre());
+        txtApellido.setText(selectedVendedor.getApellido());
+        txtTelefono.setText(selectedVendedor.getTelefono());
+        txtRuc.setText(selectedVendedor.getRuc());
+        txtDni.setText(selectedVendedor.getDni());
+
+        // Deshabilitar los campos para la edición
+        txtNombre.setEditable(false);
+        txtApellido.setEditable(false);
+        txtTelefono.setEditable(false);
+        txtRuc.setEditable(false);
+        txtDni.setEditable(false);
+
+        // Update the vendedor in the controller
+        vc.setVendedor(selectedVendedor);
     }
+}
 
-    public void cargarVistaVendedor() throws VacioExceptions {
-        int selectedIndex = cbxVendedores.getSelectedIndex();
+public void cargarVistaAuto() throws VacioExceptions {
+    int selectedIndex = cbxAutos.getSelectedIndex();
 
-        if (selectedIndex == 0) {
-            txtNombre.setText("");
-            txtApellido.setText("");
-            txtTelefono.setText("");
-            txtRuc.setText("");
-            txtDni.setText("");
+    if (selectedIndex == 0) {
+        txtModelo.setText("");
+        txtColor.setText("");
+        txtAnio.setText("");
+        cbxMarca.setSelectedIndex(0);
 
-            // Habilitar los campos para la edición
-            txtNombre.setEditable(true);
-            txtApellido.setEditable(true);
-            txtTelefono.setEditable(true);
-            txtRuc.setEditable(true);
-            txtDni.setEditable(true);
-        } else {
-            Vendedor selectedVendedor = null;
-            try {
-                selectedVendedor = mtv2.getVendedores().get(selectedIndex - 1);
-            } catch (VacioExceptions ex) {
-                throw new RuntimeException(ex);
-            }
-            txtNombre.setText(selectedVendedor.getNombre());
-            txtApellido.setText(selectedVendedor.getApellido());
-            txtTelefono.setText(selectedVendedor.getTelefono());
-            txtRuc.setText(selectedVendedor.getRuc());
-            txtDni.setText(selectedVendedor.getDni());
+        // Habilitar los campos para la edición
+        txtModelo.setEditable(true);
+        txtColor.setEditable(true);
+        txtAnio.setEditable(true);
+        cbxMarca.setEnabled(true);
 
-            // Deshabilitar los campos para la edición
-            txtNombre.setEditable(false);
-            txtApellido.setEditable(false);
-            txtTelefono.setEditable(false);
-            txtRuc.setEditable(false);
-            txtDni.setEditable(false);
+        // Reset the auto in the controller
+        ac.setAuto(new Auto());
+    } else {
+        Auto selectedAuto = null;
+        try {
+            selectedAuto = mta.getAutos().get(selectedIndex - 1);
+        } catch (VacioExceptions ex) {
+            throw new RuntimeException(ex);
         }
+        txtModelo.setText(selectedAuto.getModelo());
+        txtColor.setText(selectedAuto.getColor());
+        txtAnio.setText(selectedAuto.getAnio());
+        cbxMarca.setSelectedIndex(selectedAuto.getId_marca());
+
+        // Deshabilitar los campos para la edición
+        txtModelo.setEditable(false);
+        txtColor.setEditable(false);
+        txtAnio.setEditable(false);
+        cbxMarca.setEnabled(false);
+
+        // Update the auto in the controller
+        ac.setAuto(selectedAuto);
     }
+}
 
     public void cargarTabla() {
         mta.setAutos(ac.getAutos());
@@ -176,54 +188,62 @@ public class Frm_Ventas extends JFrame {
         mtv.setVentas(venc.getVentas());
         tblTable1.setModel(mtv);
         tblTable1.updateUI();
+
+        mtv.fireTableDataChanged();  // Notifica a la tabla que los datos han cambiado
     }
 
-    public void guardar() {
-        if (validar()) {
-            try {
-                // Vendedor
+
+
+public void guardar() {
+    if (validar()) {
+        try {
+            // Vendedor
+            if (!vc.existe()) {
                 vc.getVendedor().setNombre(txtNombre.getText());
                 vc.getVendedor().setApellido(txtApellido.getText());
                 vc.getVendedor().setTelefono(txtTelefono.getText());
                 vc.getVendedor().setRuc(txtRuc.getText());
                 vc.getVendedor().setDni(txtDni.getText());
+                vc.guardar();
+            }
 
-                // Auto
+            // Auto
+            if (!ac.existe()) {
                 ac.getAuto().setModelo(txtModelo.getText());
                 ac.getAuto().setColor(txtColor.getText());
                 ac.getAuto().setAnio(txtAnio.getText());
                 ac.getAuto().setId_marca(cbxMarca.getSelectedIndex() + 1);
-
-                // Venta
-                Date fecha = dateFormat.parse(txtFecha.getText());
-                venc.getVenta().setFecha(fecha);
-                venc.getVenta().setDescripcion(txtDescripcion.getText());
-                venc.getVenta().setTotal(Double.parseDouble(txtNroVenta.getText()));
-                venc.getVenta().setNro_venta(txtNroVenta.getText());
-
-                if (ac.guardar() && vc.guardar()) {
-                    venc.getVenta().setId_auto(vc.getVendedor().getId());
-                    venc.getVenta().setId_vendedor(ac.getAuto().getId());
-                    if (venc.guardar()) {
-                        limpiar();
-                        JOptionPane.showMessageDialog(null, "Se guardó correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo guardar", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo guardar", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Ingrese valores numéricos válidos", "Error", JOptionPane.ERROR_MESSAGE);
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Error al guardar datos: " + e.getMessage());
+                ac.guardar();
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Complete todos los campos");
+
+            // Venta
+            Date fecha = dateFormat.parse(txtFecha.getText());
+            venc.getVenta().setFecha(fecha);
+            venc.getVenta().setDescripcion(txtDescripcion.getText());
+            venc.getVenta().setTotal(Double.parseDouble(txtPrecioTotal.getText()));
+            venc.getVenta().setNro_venta(txtNroVenta.getText());
+            venc.getVenta().setId_auto(ac.getAuto().getId());
+            venc.getVenta().setId_vendedor(vc.getVendedor().getId());
+
+            if (venc.guardar()) {
+                limpiar();
+                cargarTabla();
+                mtv.fireTableDataChanged();  // Notifica a la tabla que los datos han cambiado
+                JOptionPane.showMessageDialog(null, "Se guardó correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo guardar", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al guardar datos: " + e.getMessage());
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "Complete todos los campos");
     }
+}
 
     public Boolean validar() {
         return !txtModelo.getText().trim().isEmpty() &&
@@ -252,9 +272,11 @@ public class Frm_Ventas extends JFrame {
         txtDescripcion.setText("");
         txtNroVenta.setText("");
         txtFecha.setText("");
+        txtPrecioTotal.setText("");
+        txtNroVenta.setText(venc.generatedCode());
+        txtNroVenta.setEnabled(false);
         cbxVendedores.setSelectedItem(0);
         cbxAutos.setSelectedItem(0);
-        cargarTabla();
         try {
             UtilVista.cargaMarca(cbxMarca);
             UtilVista.cargaAuto(cbxAutos);
@@ -263,6 +285,8 @@ public class Frm_Ventas extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        cargarPH();
+        cargarTabla();
     }
 
     public void initFrame() {
@@ -272,6 +296,8 @@ public class Frm_Ventas extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setTitle("Registro de Ventas");
+
+
 
         try {
             MaskFormatter dateMask = new MaskFormatter("##/##/####");
@@ -304,7 +330,6 @@ public class Frm_Ventas extends JFrame {
         TextPrompt anio = new TextPrompt("Año", txtAnio);
         TextPrompt descripcion = new TextPrompt("Descripcion", txtDescripcion);
         TextPrompt precioT = new TextPrompt("Precio Total", txtPrecioTotal);
-
     }
 
 

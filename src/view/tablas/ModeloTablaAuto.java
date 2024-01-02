@@ -17,7 +17,7 @@ public class ModeloTablaAuto extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     public ListaEnlazada<Auto> getAutos() {
@@ -37,20 +37,22 @@ public class ModeloTablaAuto extends AbstractTableModel {
             throw new RuntimeException(e);
         }
         return switch (columnIndex) {
-            case 0 -> (auto != null) ? auto.getId_marca().toString() : "";
+            case 0 -> (auto != null) ? auto.getId() : "";
             case 1 -> (auto != null) ? auto.getModelo() : "";
-            case 2 -> (auto != null) ? auto.getColor() : "";
-            case 3 -> (auto != null) ? auto.getAnio(): "";
+            case 2 -> (auto != null) ? auto.getId_marca() : "";
+            case 3 -> (auto != null) ? auto.getColor() : "";
+            case 4 -> (auto != null) ? auto.getAnio() : "";
             default -> null;
         };
     }
 
     public String getColumnName(int column) {
         return switch (column) {
-            case 0 -> "Marca";
+            case 0 -> "Id";
             case 1 -> "Modelo";
-            case 2 -> "Color";
-            case 3 -> "Anio";
+            case 2 -> "Marca";
+            case 3 -> "Color";
+            case 4 -> "Anio";
             default -> null;
         };
     }

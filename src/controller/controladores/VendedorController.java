@@ -55,4 +55,13 @@ public class VendedorController extends DataAccessObject<Vendedor> {
         return update(vendedor, index);
     }
 
+    public boolean existe() {
+        for (Vendedor vendedorExistente : getVendedores()) {
+            if (vendedorExistente.getId().equals(vendedor.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
