@@ -27,7 +27,7 @@ public class UtilVista {
         cbxauto.addItem("Seleccione un auto");
         try {
             for (int i = 0; i < ac.getAutos().getSize(); i++) {
-                cbxauto.addItem(ac.getAutos().get(i));
+                cbxauto.addItem(ac.getAutos().get(i).getModelo());
             }
         } catch (VacioExceptions e) {
             e.printStackTrace();
@@ -42,7 +42,7 @@ public class UtilVista {
 
         try {
             for (int i = 0; i < venc.getVendedores().getSize(); i++) {
-                cbxvendedor.addItem(venc.getVendedores().get(i));
+                cbxvendedor.addItem(venc.getVendedores().get(i).getNombre() + " " + venc.getVendedores().get(i).getApellido());
             }
         } catch (VacioExceptions e) {
             e.printStackTrace();

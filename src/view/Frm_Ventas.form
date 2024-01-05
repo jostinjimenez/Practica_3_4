@@ -390,7 +390,7 @@
                     </constraints>
                     <properties/>
                   </component>
-                  <component id="44b7b" class="javax.swing.JComboBox">
+                  <component id="44b7b" class="javax.swing.JComboBox" binding="cbxAscDesc2">
                     <constraints>
                       <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -403,7 +403,7 @@
                       <selectedIndex value="0"/>
                     </properties>
                   </component>
-                  <component id="3d963" class="javax.swing.JComboBox">
+                  <component id="3d963" class="javax.swing.JComboBox" binding="cbxCriterioAuto">
                     <constraints>
                       <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -477,7 +477,7 @@
                     </constraints>
                     <properties/>
                   </component>
-                  <component id="cabb6" class="javax.swing.JComboBox">
+                  <component id="cabb6" class="javax.swing.JComboBox" binding="cbxAscDesc3">
                     <constraints>
                       <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -490,7 +490,7 @@
                       <selectedIndex value="0"/>
                     </properties>
                   </component>
-                  <component id="f2042" class="javax.swing.JComboBox">
+                  <component id="f2042" class="javax.swing.JComboBox" binding="cbxCriterioVendedor">
                     <constraints>
                       <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -571,7 +571,7 @@
                     </constraints>
                     <properties/>
                   </component>
-                  <component id="a11c9" class="javax.swing.JComboBox">
+                  <component id="a11c9" class="javax.swing.JComboBox" binding="cbxAscDesc1">
                     <constraints>
                       <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -584,7 +584,7 @@
                       <selectedIndex value="0"/>
                     </properties>
                   </component>
-                  <component id="accd9" class="javax.swing.JComboBox">
+                  <component id="accd9" class="javax.swing.JComboBox" binding="cbxCriterioVenta">
                     <constraints>
                       <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
