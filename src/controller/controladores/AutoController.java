@@ -71,6 +71,7 @@ public class AutoController extends DataAccessObject<Auto> {
 
     // Ordenar por QuickSort
     public ListaEnlazada<Auto> ordenarQS(ListaEnlazada<Auto> lista, Integer type, String field) throws Exception {
+        long startTime = System.nanoTime();
         Auto[] autos = lista.toArray();
         Field faux = getField(Auto.class, field);
         if (faux != null) {
@@ -78,6 +79,9 @@ public class AutoController extends DataAccessObject<Auto> {
         } else {
             throw new Exception("El atributo no existe");
         }
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime);
+        System.out.println("Tiempo de ejecución de ordenarQS: " + duration + " nanosegundos");
         return lista.toList(autos);
     }
 
@@ -112,6 +116,7 @@ public class AutoController extends DataAccessObject<Auto> {
 
     // Ordenar por MergeSort
     public ListaEnlazada<Auto> ordenarMS(ListaEnlazada<Auto> lista, Integer type, String field) throws Exception {
+        long startTime = System.nanoTime();
         Auto[] autos = lista.toArray();
         Field faux = getField(Auto.class, field);
         if (faux != null) {
@@ -119,6 +124,9 @@ public class AutoController extends DataAccessObject<Auto> {
         } else {
             throw new Exception("El atributo no existe");
         }
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime);
+        System.out.println("Tiempo de ejecución de ordenarMS: " + duration + " nanosegundos");
         return lista.toList(autos);
     }
 
@@ -178,48 +186,7 @@ public class AutoController extends DataAccessObject<Auto> {
 
     public static void main(String[] args) {
         AutoController ac = new AutoController();
-//        ac.getAuto().setId(1);
-//        ac.getAuto().setModelo("2019");
-//        ac.getAuto().setId_marca(1);
-//        ac.save(ac.getAuto());
-//
-//        ac.getAuto().setId(2);
-//        ac.getAuto().setModelo("2018");
-//        ac.getAuto().setId_marca(2);
-//        ac.save(ac.getAuto());
-//
-//        ac.getAuto().setId(3);
-//        ac.getAuto().setModelo("2017");
-//        ac.getAuto().setId_marca(3);
-//        ac.save(ac.getAuto());
-//
-//        ac.getAuto().setId(4);
-//        ac.getAuto().setModelo("2016");
-//        ac.getAuto().setId_marca(4);
-//        ac.save(ac.getAuto());
-//
-//        ac.getAuto().setId(5);
-//        ac.getAuto().setModelo("2015");
-//        ac.getAuto().setId_marca(5);
-//        ac.save(ac.getAuto());
-//
-//        ac.getAuto().setId(6);
-//        ac.getAuto().setModelo("2014");
-//        ac.getAuto().setId_marca(6);
-//        ac.save(ac.getAuto());
-//
-//        ac.getAuto().setId(7);
-//        ac.getAuto().setModelo("2013");
-//        ac.getAuto().setId_marca(7);
-//        ac.save(ac.getAuto());
 
-//        System.out.println("Ordenamiento por QuickSort");
-//        System.out.println("--------------------------------");
-//        try {
-//            System.out.println(ac.ordenarMS(ac.getAutos(), 0, "id").print());
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
     }
 }
 

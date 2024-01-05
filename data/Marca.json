@@ -1,0 +1,64 @@
+{
+  "controller.tda_listas.ListaEnlazada": {
+    "head": {
+      "data": {
+        "@class": "model.Marca",
+        "id": 1,
+        "nombre": "Toyota",
+        "estado": true
+      },
+      "next": {
+        "data": {
+          "@class": "model.Marca",
+          "id": 2,
+          "nombre": "Nissan",
+          "estado": true
+        },
+        "next": {
+          "data": {
+            "@class": "model.Marca",
+            "id": 3,
+            "nombre": "Mazda",
+            "estado": true
+          },
+          "next": {
+            "data": {
+              "@class": "model.Marca",
+              "id": 4,
+              "nombre": "Honda",
+              "estado": true
+            },
+            "next": {
+              "data": {
+                "@class": "model.Marca",
+                "id": 5,
+                "nombre": "Hyundai",
+                "estado": true
+              },
+              "next": {
+                "data": {
+                  "@class": "model.Marca",
+                  "id": 6,
+                  "nombre": "Kia",
+                  "estado": true
+                },
+                "next": {
+                  "data": {
+                    "@class": "model.Marca",
+                    "id": 7,
+                    "nombre": "Chevrolet",
+                    "estado": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "last": {
+      "@reference": "..\/head\/next\/next\/next\/next\/next\/next"
+    },
+    "size": 7
+  }
+}

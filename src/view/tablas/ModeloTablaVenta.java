@@ -18,7 +18,7 @@ public class ModeloTablaVenta extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
     public ListaEnlazada<Venta> getVentas() {
@@ -39,12 +39,15 @@ public class ModeloTablaVenta extends AbstractTableModel {
         }
         switch (columnIndex) {
             case 0 -> {
-                return (venta != null) ? venta.getNro_venta() : "";
+                return (venta != null) ? venta.getId() : "";
             }
             case 1 -> {
-                return (venta != null) ?  "$" + venta.getTotal() : "";
+                return (venta != null) ? venta.getNro_venta() : "";
             }
             case 2 -> {
+                return (venta != null) ?  "$" + venta.getTotal() : "";
+            }
+            case 3 -> {
                 if (venta != null) {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     return dateFormat.format(venta.getFecha());
@@ -52,10 +55,10 @@ public class ModeloTablaVenta extends AbstractTableModel {
                     return "";
                 }
             }
-            case 3 -> {
+            case 4 -> {
                 return (venta != null) ? venta.getId_vendedor() : "";
             }
-            case 4 -> {
+            case 5 -> {
                 return (venta != null) ? venta.getId_auto() : "";
             }
             default -> {
@@ -66,11 +69,12 @@ public class ModeloTablaVenta extends AbstractTableModel {
 
     public String getColumnName(int column) {
         return switch (column) {
-            case 0 -> "Nro. Venta";
-            case 1 -> "Total";
-            case 2 -> "Fecha";
-            case 3 -> "Id Vendedor";
-            case 4 -> "Id Auto";
+            case 0 -> "ID";
+            case 1 -> "Nro. Venta";
+            case 2 -> "Total";
+            case 3 -> "Fecha";
+            case 4 -> "Id Vendedor";
+            case 5 -> "Id Auto";
             default -> null;
         };
     }

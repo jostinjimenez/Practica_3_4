@@ -15,6 +15,8 @@ import view.util.TextPrompt;
 import view.util.UtilVista;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
@@ -54,6 +56,11 @@ public class Frm_Ventas extends JFrame {
     private JComboBox cbxAscDesc1;
     private JComboBox cbxAscDesc2;
     private JComboBox cbxAscDesc3;
+    private JTextField txtBuscarVenta;
+    private JComboBox cbxBuscarVenta;
+    private JButton btnLinealBinaria;
+    private JRadioButton btnBinaria;
+    private JRadioButton btnLinealB;
 
     //Constructor
     public Frm_Ventas() {
@@ -127,6 +134,25 @@ public class Frm_Ventas extends JFrame {
                 }
             }
         });
+
+        //cbxBuscarVenta.addItemListener(e -> buscar());
+
+        txtBuscarVenta.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                buscar();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                buscar();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                buscar();
+            }
+        });
     }
 
     // Atributos
@@ -139,7 +165,50 @@ public class Frm_Ventas extends JFrame {
     private final ModeloTablaAuto mta = new ModeloTablaAuto();
 
     // Metodos
-    private void ordenarVentas(){
+    private void buscar() {
+        String criterio = Objects.requireNonNull(cbxBuscarVenta.getSelectedItem()).toString().toLowerCase();
+        String texto = txtBuscarVenta.getText();
+
+        try {
+            if (texto.isEmpty()) {
+                mtv.setVentas(venc.getVentas());
+            } else {
+                if (btnBinaria.isSelected()) {
+                    if (criterio.equalsIgnoreCase("id")) {
+                        Integer id = Integer.valueOf(texto);
+                        mtv.setVentas(venc.buscarIdB(venc.list_All(), id));
+                        //System.out.println(venc.buscarIdB(venc.list_All(), id).print());
+                    } else if (criterio.equalsIgnoreCase("total")) {
+                        Double total = Double.valueOf(texto);
+                        mtv.setVentas(venc.buscarTotalB(venc.list_All(), total));
+                        //System.out.println(venc.buscarTotalB(venc.list_All(), total).print());
+                    } else if (criterio.equalsIgnoreCase("fecha")) {
+                        if (!texto.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                            return;
+                        }
+                        mtv.setVentas(venc.buscarFechaB(venc.list_All(), texto));
+                        System.out.println(venc.buscarFechaB(venc.list_All(), texto).print());
+                    }
+                } else if (btnLinealB.isSelected()) {
+                    if (criterio.equalsIgnoreCase("id")) {
+                        Integer id = Integer.valueOf(texto);
+                        mtv.setVentas(venc.buscarIdLB(venc.list_All(), id));
+                    } else if (criterio.equalsIgnoreCase("total")) {
+                        Double total = Double.valueOf(texto);
+                        mtv.setVentas(venc.buscarTotalLB(venc.list_All(), total));
+                    } else if (criterio.equalsIgnoreCase("fecha")) {
+                        mtv.setVentas(venc.buscarFechaLB(venc.list_All(), texto));
+                    }
+                }
+            }
+            tblTable1.setModel(mtv);
+            tblTable1.updateUI();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void ordenarVentas() {
         String criterio = Objects.requireNonNull(cbxCriterioVenta.getSelectedItem()).toString().toLowerCase();
         Integer ascDesc = cbxAscDesc1.getSelectedIndex();
 
@@ -157,7 +226,7 @@ public class Frm_Ventas extends JFrame {
         Integer ascDesc = cbxAscDesc2.getSelectedIndex();
 
         try {
-            mta.setAutos(ac.ordenarQS(ac.getAutos(), ascDesc, criterio));
+            mta.setAutos(ac.ordenarMS(ac.getAutos(), ascDesc, criterio));
             tblTable2.setModel(mta);
             tblTable2.updateUI();
         } catch (Exception e) {

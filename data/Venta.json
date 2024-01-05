@@ -1,0 +1,188 @@
+{
+  "controller.tda_listas.ListaEnlazada": {
+    "head": {
+      "data": {
+        "@class": "model.Venta",
+        "id": 1,
+        "total": 85000,
+        "fecha": "2024-01-02 05:00:00.0 UTC",
+        "nro_venta": "0000000001",
+        "descripcion": "Buen auto",
+        "id_auto": 1,
+        "id_vendedor": 1
+      },
+      "next": {
+        "data": {
+          "@class": "model.Venta",
+          "id": 2,
+          "total": 50000,
+          "fecha": "2021-06-15 05:00:00.0 UTC",
+          "nro_venta": "0000000002",
+          "descripcion": "ok",
+          "id_auto": 1,
+          "id_vendedor": 1
+        },
+        "next": {
+          "data": {
+            "@class": "model.Venta",
+            "id": 3,
+            "total": 120000,
+            "fecha": "2016-09-15 05:00:00.0 UTC",
+            "nro_venta": "0000000003",
+            "descripcion": "ok",
+            "id_auto": 2,
+            "id_vendedor": 2
+          },
+          "next": {
+            "data": {
+              "@class": "model.Venta",
+              "id": 4,
+              "total": 9000,
+              "fecha": "2016-05-23 05:00:00.0 UTC",
+              "nro_venta": "0000000004",
+              "descripcion": "ok",
+              "id_auto": 3,
+              "id_vendedor": 3
+            },
+            "next": {
+              "data": {
+                "@class": "model.Venta",
+                "id": 5,
+                "total": 65000,
+                "fecha": "2024-01-05 05:00:00.0 UTC",
+                "nro_venta": "0000000005",
+                "descripcion": "ok",
+                "id_auto": 4,
+                "id_vendedor": 4
+              },
+              "next": {
+                "data": {
+                  "@class": "model.Venta",
+                  "id": 6,
+                  "total": 75000,
+                  "fecha": "2013-06-14 05:00:00.0 UTC",
+                  "nro_venta": "0000000006",
+                  "descripcion": "ok",
+                  "id_auto": 5,
+                  "id_vendedor": 5
+                },
+                "next": {
+                  "data": {
+                    "@class": "model.Venta",
+                    "id": 7,
+                    "total": 45000,
+                    "fecha": "2022-12-12 05:00:00.0 UTC",
+                    "nro_venta": "0000000007",
+                    "descripcion": "ok",
+                    "id_auto": 6,
+                    "id_vendedor": 6
+                  },
+                  "next": {
+                    "data": {
+                      "@class": "model.Venta",
+                      "id": 8,
+                      "total": 23000,
+                      "fecha": "2011-01-15 05:00:00.0 UTC",
+                      "nro_venta": "0000000008",
+                      "descripcion": "ok",
+                      "id_auto": 7,
+                      "id_vendedor": 7
+                    },
+                    "next": {
+                      "data": {
+                        "@class": "model.Venta",
+                        "id": 9,
+                        "total": 96000,
+                        "fecha": "2019-01-18 05:00:00.0 UTC",
+                        "nro_venta": "0000000009",
+                        "descripcion": "ok\n",
+                        "id_auto": 8,
+                        "id_vendedor": 8
+                      },
+                      "next": {
+                        "data": {
+                          "@class": "model.Venta",
+                          "id": 10,
+                          "total": 50000,
+                          "fecha": "2024-10-22 05:00:00.0 UTC",
+                          "nro_venta": "0000000010",
+                          "descripcion": "ok",
+                          "id_auto": 9,
+                          "id_vendedor": 9
+                        },
+                        "next": {
+                          "data": {
+                            "@class": "model.Venta",
+                            "id": 11,
+                            "total": 69000,
+                            "fecha": "2016-06-15 05:00:00.0 UTC",
+                            "nro_venta": "0000000011",
+                            "descripcion": "ok",
+                            "id_auto": 10,
+                            "id_vendedor": 10
+                          },
+                          "next": {
+                            "data": {
+                              "@class": "model.Venta",
+                              "id": 12,
+                              "total": 20000,
+                              "fecha": "2013-04-20 05:00:00.0 UTC",
+                              "nro_venta": "0000000012",
+                              "descripcion": "ok",
+                              "id_auto": 11,
+                              "id_vendedor": 11
+                            },
+                            "next": {
+                              "data": {
+                                "@class": "model.Venta",
+                                "id": 13,
+                                "total": 62000,
+                                "fecha": "2022-06-14 05:00:00.0 UTC",
+                                "nro_venta": "0000000013",
+                                "descripcion": "ok",
+                                "id_auto": 12,
+                                "id_vendedor": 12
+                              },
+                              "next": {
+                                "data": {
+                                  "@class": "model.Venta",
+                                  "id": 14,
+                                  "total": 25000,
+                                  "fecha": "2024-01-01 05:00:00.0 UTC",
+                                  "nro_venta": "0000000014",
+                                  "descripcion": "ok",
+                                  "id_auto": 13,
+                                  "id_vendedor": 13
+                                },
+                                "next": {
+                                  "data": {
+                                    "@class": "model.Venta",
+                                    "id": 15,
+                                    "total": 65000,
+                                    "fecha": "2018-11-16 05:00:00.0 UTC",
+                                    "nro_venta": "0000000015",
+                                    "descripcion": "ok",
+                                    "id_auto": 14,
+                                    "id_vendedor": 14
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "last": {
+      "@reference": "..\/head\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next\/next"
+    },
+    "size": 15
+  }
+}

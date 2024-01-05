@@ -7,6 +7,8 @@ import model.Vendedor;
 import model.Venta;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static controller.controladores.util.Utilidades.getField;
 
@@ -178,4 +180,275 @@ public class VentaController extends DataAccessObject<Venta> {
         }
     }
 
+    // Buscar por Busqueda Binaria
+    public ListaEnlazada<Venta> buscarIdB(ListaEnlazada<Venta> lista, Integer id) throws Exception {
+        ListaEnlazada<Venta> lo = this.ordenarQS(lista, 0, "id");
+        Venta[] p = lo.toArray();
+        ListaEnlazada<Venta> result = new ListaEnlazada<>();
+
+        int left = 0;
+        int right = lista.getSize() - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (p[mid].getId().intValue() == id.intValue()) {
+                result.add(p[mid]);
+
+                int temp = mid - 1;
+                while (temp >= left && p[temp].getId().intValue() == id.intValue()) {
+                    result.add(p[temp]);
+                    temp--;
+                }
+
+                temp = mid + 1;
+                while (temp <= right && p[temp].getId().intValue() == id.intValue()) {
+                    result.add(p[temp]);
+                    temp++;
+                }
+                return result;
+            }
+            if (p[mid].getId().intValue() < id.intValue()) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return result;
+    }
+
+    public ListaEnlazada<Venta> buscarIdLB(ListaEnlazada<Venta> lista, Integer id) throws Exception {
+        lista = this.ordenarQS(lista, 0, "id");
+
+        int n = lista.getSize();
+        int segmento = (int) Math.sqrt(n);
+        Venta[] personas = lista.toArray();
+        ListaEnlazada<Venta> result = new ListaEnlazada<>();
+
+        int i;
+        for (i = 0; i < n; i += segmento) {
+            if (personas[Math.min(i + segmento, n) - 1].getId().intValue() >= id.intValue()) {
+                break;
+            }
+        }
+
+        if (i >= n) {
+            return result;
+        }
+
+        int lo = i;
+        int hi = Math.min(i + segmento, n);
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (personas[mid].getId().intValue() == id.intValue()) {
+                result.add(personas[mid]);
+
+                int aux = mid - 1;
+                while (aux >= lo && personas[aux].getId().intValue() == id.intValue()) {
+                    result.add(personas[aux]);
+                    aux--;
+                }
+
+                aux = mid + 1;
+                while (aux < hi && personas[aux].getId().intValue() == id.intValue()) {
+                    result.add(personas[aux]);
+                    aux++;
+                }
+                return result;
+            } else if (personas[mid].getId().intValue() < id.intValue()) {
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+        return result;
+    }
+
+    // Buscar Total por Binario
+    public ListaEnlazada<Venta> buscarTotalB(ListaEnlazada<Venta> lista, Double total) throws Exception {
+        ListaEnlazada<Venta> lo = this.ordenarQS(lista, 0, "total");
+        Venta[] p = lo.toArray();
+        ListaEnlazada<Venta> result = new ListaEnlazada<>();
+
+        int left = 0;
+        int right = lista.getSize() - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (p[mid].getTotal().doubleValue() == total.doubleValue()) {
+                result.add(p[mid]);
+
+                int temp = mid - 1;
+                while (temp >= left && p[temp].getTotal().doubleValue() == total.doubleValue()) {
+                    result.add(p[temp]);
+                    temp--;
+                }
+
+                temp = mid + 1;
+                while (temp <= right && p[temp].getTotal().doubleValue() == total.doubleValue()) {
+                    result.add(p[temp]);
+                    temp++;
+                }
+                return result;
+            }
+            if (p[mid].getTotal().doubleValue() < total.doubleValue()) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return result;
+    }
+
+    public ListaEnlazada<Venta> buscarTotalLB(ListaEnlazada<Venta> lista, Double total) throws Exception {
+        lista = this.ordenarQS(lista, 0, "total");
+
+        int n = lista.getSize();
+        int segmento = (int) Math.sqrt(n);
+        Venta[] personas = lista.toArray();
+        ListaEnlazada<Venta> result = new ListaEnlazada<>();
+
+        int i;
+        for (i = 0; i < n; i += segmento) {
+            if (personas[Math.min(i + segmento, n) - 1].getTotal().doubleValue() >= total.doubleValue()) {
+                break;
+            }
+        }
+
+        if (i >= n) {
+            return result;
+        }
+
+        int lo = i;
+        int hi = Math.min(i + segmento, n);
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (personas[mid].getTotal().doubleValue() == total.doubleValue()) {
+                result.add(personas[mid]);
+
+                int aux = mid - 1;
+                while (aux >= lo && personas[aux].getTotal().doubleValue() == total.doubleValue()) {
+                    result.add(personas[aux]);
+                    aux--;
+                }
+
+                aux = mid + 1;
+                while (aux < hi && personas[aux].getTotal().doubleValue() == total.doubleValue()) {
+                    result.add(personas[aux]);
+                    aux++;
+                }
+                return result;
+            } else if (personas[mid].getTotal().doubleValue() < total.doubleValue()) {
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+        return result;
+    }
+
+    // Buscar Fecha por Binario
+// Buscar Fecha por Binario
+    public ListaEnlazada<Venta> buscarFechaB(ListaEnlazada<Venta> lista, String fecha) throws Exception {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = dateFormat.parse(fecha);
+
+        ListaEnlazada<Venta> lo = this.ordenarQS(lista, 0, "fecha");
+        Venta[] p = lo.toArray();
+        ListaEnlazada<Venta> result = new ListaEnlazada<>();
+
+        int left = 0;
+        int right = lista.getSize() - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            Date midDate = dateFormat.parse(dateFormat.format(p[mid].getFecha()));
+            if (midDate.equals(fechaDate)) {
+                result.add(p[mid]);
+
+                int temp = mid - 1;
+                while (temp >= left && dateFormat.parse(dateFormat.format(p[temp].getFecha())).equals(fechaDate)) {
+                    result.add(p[temp]);
+                    temp--;
+                }
+
+                temp = mid + 1;
+                while (temp <= right && dateFormat.parse(dateFormat.format(p[temp].getFecha())).equals(fechaDate)) {
+                    result.add(p[temp]);
+                    temp++;
+                }
+                return result;
+            }
+            if (midDate.before(fechaDate)) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return result;
+    }
+
+    public ListaEnlazada<Venta> buscarFechaLB(ListaEnlazada<Venta> lista, String fecha) throws Exception {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = dateFormat.parse(fecha);
+
+        lista = this.ordenarQS(lista, 0, "fecha");
+
+        int n = lista.getSize();
+        int segmento = (int) Math.sqrt(n);
+        Venta[] personas = lista.toArray();
+        ListaEnlazada<Venta> result = new ListaEnlazada<>();
+
+        int i;
+        for (i = 0; i < n; i += segmento) {
+            if (dateFormat.parse(dateFormat.format(personas[Math.min(i + segmento, n) - 1].getFecha())).compareTo(fechaDate) >= 0) {
+                break;
+            }
+        }
+
+        if (i >= n) {
+            return result;
+        }
+
+        int lo = i;
+        int hi = Math.min(i + segmento, n);
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            Date midDate = dateFormat.parse(dateFormat.format(personas[mid].getFecha()));
+            if (midDate.equals(fechaDate)) {
+                result.add(personas[mid]);
+
+                int aux = mid - 1;
+                while (aux >= lo && dateFormat.parse(dateFormat.format(personas[aux].getFecha())).equals(fechaDate)) {
+                    result.add(personas[aux]);
+                    aux--;
+                }
+
+                aux = mid + 1;
+                while (aux < hi && dateFormat.parse(dateFormat.format(personas[aux].getFecha())).equals(fechaDate)) {
+                    result.add(personas[aux]);
+                    aux++;
+                }
+                return result;
+            } else if (midDate.before(fechaDate)) {
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+        return result;
+    }
+
+
+    public static void main(String[] args) {
+        VentaController venc = new VentaController();
+
+        try {
+            System.out.println(venc.buscarFechaB(venc.getVentas(), "2024-01-02").print());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
